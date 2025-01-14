@@ -1,4 +1,6 @@
 packages:
+  # For addressing https://github.com/JCSDA/spack-stack/issues/1355
+  #   Use system zlib instead of spack-built zlib-ng
   all:
     compiler:: [intel@2021.9.0,gcc@12.2.0]
     providers:
@@ -7,6 +9,16 @@ packages:
       blas:: [openblas]
       fftw-api:: [fftw]
       lapack:: [openblas]
+      zlib-api:: [zlib]
+
+  zlib-api:
+    buildable: False
+  zlib:
+    buildable: False
+    externals:
+    - spec: zlib@1.2.11
+      prefix: /usr
+
   mpi:
     buildable: False
   intel-oneapi-mpi:
